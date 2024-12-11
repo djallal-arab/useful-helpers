@@ -2,7 +2,6 @@ from typing import List, Dict, Union, Optional, Any
 import numpy as np
 import chromadb
 import torch
-from chromadb.api.types import IncludeEnum
 from sklearn.preprocessing import normalize
 import logging
 import asyncio
@@ -123,7 +122,7 @@ class ChromaDBHelper:
                      distance_threshold: Optional[float] = None) -> List[Dict]:
         processed_query = self._process_vector(query_vector)
         results = self.collection.query(query_embeddings=[processed_query.tolist()], n_results=n_results,
-                                        include= [IncludeEnum.metadatas, IncludeEnum.distances],
+                                        include= ["metadatas", "distances"],
                                         where=filters)
 
         output = []
